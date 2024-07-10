@@ -1,5 +1,3 @@
-//JavaScript To Do List
-
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
@@ -97,12 +95,26 @@ li button:hover {
 </div>
 
 <ul class="list-content">
-  <li>Walk the Dog</li>
-  <li>Go Shopping</li>
-  <li>Cook Tea</li>
+  <li id="chore-item" onclick = "completeButton(this)">Walk the Dog<button onclick = "deleteButton(this)">Delete</button><button id="complete-item">Complete</button></li>
+  <li id="chore-item" onclick = "completeButton(this)">Clean Car<button onclick = "deleteButton(this)">Delete</button><button id="complete-item">Complete</button></li>
+  <li id="chore-item" onclick = "completeButton(this)">Cook Tea<button onclick = "deleteButton(this)">Delete</button><button id="complete-item">Complete</button></li>
 </ul>
 
 <script>
+
+//Function to delete HTML list items and change colour when item is complete
+const deleteItem = document.querySelectorAll("#delete-button");
+const itemRemove = document.querySelectorAll("#chore-item");
+const completeItem = document.querySelectorAll("#complete-item");
+
+function deleteButton(e) {
+  e.parentElement.remove()
+};
+
+function completeButton(itemRemove) {
+  itemRemove.style.color = 'green';
+};
+
 const list = document.querySelector('ul');
 const item = document.querySelector('li');
 const input = document.querySelector('input');
@@ -123,11 +135,19 @@ toDoItem.appendChild(toDoName);
 toDoName.textContent = listItem;
 toDoItem.appendChild(toDoButton);
 toDoButton.textContent = 'Delete';
+toDoItem.appendChild(toDoComplete);
+toDoComplete.textContent = 'Complete';
 list.appendChild(toDoItem);
+
   
 //Function to delete items from the list
  toDoButton.addEventListener('click', ()=> {
  list.removeChild(toDoItem);
+});
+
+//Function to Change color of list item to show it's completed
+toDoComplete.addEventListener('click', ()=> {
+ toDoItem.style.color = 'green';
 });
   
 input.focus();
